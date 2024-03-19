@@ -43,15 +43,13 @@ const compareTranslations = async (baseFilePath, targetFilePath) => {
 };
 
 const localeDir = "src/locale";
+const baseFile = "messages.xlf"; // Assuming message.en.xlf is the base language file
 const xlfFiles = fs
   .readdirSync(localeDir)
-  .filter((file) => file.endsWith(".xlf"));
+  .filter((file) => file.endsWith(".xlf") && file !== baseFile);
 
-xlfFiles.forEach((baseFile, index) => {
-  for (let i = index + 1; i < xlfFiles.length; i++) {
-    const targetFile = xlfFiles[i];
-    const basePath = path.join(localeDir, baseFile);
-    const targetPath = path.join(localeDir, targetFile);
-    compareTranslations(basePath, targetPath).catch(console.error);
-  }
+const basePath = path.join(localeDir, baseFile);
+xlfFiles.forEach((targetFile) => {
+  const targetPath = path.join(localeDir, targetFile);
+  compareTranslations(basePath, targetPath).catch(console.error);
 });
