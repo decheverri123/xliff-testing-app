@@ -1,27 +1,48 @@
-# XliffTestingApp
+# Automated Testing
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+## XLIFF
 
-## Development server
+### Structural Validation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Validate the structure and syntax of the XLIFF files against the XLIFF schema or specification.
+- Ensure that the XLIFF files are well-formed XML documents and adhere to the XLIFF format.
+- Check for missing or incorrect elements, attributes, or tags.
+- Verify that the structure of the XLIFF files is consistent across all languages.
 
-## Code scaffolding
+### Completeness Check
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Verify that all translatable units (`<trans-unit>`) from the source language are present in the translated XLIFF files.
+- Check for missing translations or untranslated content.
+- Ensure that all required elements and attributes are present for each translation unit.
 
-## Build
+### Placeholder Consistency
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Check that placeholders (e.g., `{0}`, `{1}`) used in the source text are correctly preserved in the translations.
+- Verify that the placeholders are used consistently and have not been modified or removed in the translated text.
 
-## Running unit tests
+### Character Encoding and Special Characters
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Validate that the XLIFF files use the correct character encoding (e.g., UTF-8).
+- Check for any issues with special characters, such as non-ASCII characters or escaped entities.
+- Ensure that special characters are properly handled and displayed in the translations.
 
-## Running end-to-end tests
+### Length Validation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Compare the length of the translated text against the source text.
+- Check for translations that are significantly shorter or longer than the source text, which may indicate truncation or excessive expansion.
+- Define acceptable length thresholds and flag translations that exceed or fall below those thresholds.
 
-## Further help
+### Integration Testing
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Perform integration testing by loading the translated XLIFF files into your application or localization framework.
+- Verify that the translations are correctly displayed and functioning as expected within the application. Check for any layout or formatting issues caused by the translations.
+
+### Continuous Integration and Continuous Delivery (CI/CD)
+
+- Incorporate the automated testing of XLIFF files into your CI/CD pipeline.
+- Run the tests automatically whenever changes are made to the XLIFF files or when new translations are added.
+- Ensure that the tests are executed before deploying the application to catch any localization issues early in the development process.
+
+### Running tests
+
+`node scripts/translationCompletenessCheck.js`
