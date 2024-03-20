@@ -46,3 +46,6 @@
 ### Running tests
 
 `node scripts/translationCompletenessCheck.js`
+
+### Starting app in French
+`npm run start:fr`
