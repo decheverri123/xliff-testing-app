@@ -43,7 +43,7 @@ const compareTranslations = async (baseFilePath, targetFilePath) => {
 };
 
 const localeDir = "src/locale";
-const baseFile = "messages.xlf"; // Assuming message.en.xlf is the base language file
+const baseFile = "messages.xlf";
 const xlfFiles = fs
   .readdirSync(localeDir)
   .filter((file) => file.endsWith(".xlf") && file !== baseFile);
