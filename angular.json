@@ -15,6 +15,10 @@
           "fr": {
             "translation": "src/locale/messages.fr.xlf",
             "baseHref": ""
+          },
+          "en": {
+            "translation": "src/locale/messages.xx.xlf",
+            "baseHref": ""
           }
         }
       },
@@ -54,6 +58,9 @@
             },
             "fr": {
               "localize": ["fr"]
+            },
+            "en": {
+              "localize": ["en"]
             }
           },
           "defaultConfiguration": "production"
@@ -69,6 +76,9 @@
             },
             "fr": {
               "buildTarget": "xliff-testing-app:build:development,fr"
+            },
+            "en": {
+              "buildTarget": "xliff-testing-app:build:development,en"
             }
           },
           "defaultConfiguration": "development"

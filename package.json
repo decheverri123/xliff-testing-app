@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:fr": "ng serve --configuration=fr",
+    "start:xx": "ng serve --configuration=en",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
