@@ -5,7 +5,7 @@
     <body>
       <trans-unit id="introductionHeader" datatype="html">
         <source>
-  Hello i18n!
+          Hello i18n!
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.ts</context>
@@ -26,7 +26,7 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.ts</context>
           <context context-type="linenumber">15</context>
-        </context-group>
+        </context-group>–
       </trans-unit>
       <trans-unit id="4606963464835766483" datatype="html">
         <source>Updated <x id="ICU" equiv-text="{minutes, plural, =0 {...} =1 {...} other {...}}"/>
