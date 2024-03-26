@@ -1,0 +1,21 @@
+<trans-unit id="3967965900462880190" datatype="html">
+  <source>Updated: <x id="ICU" equiv-text="{minutes, plural, =0 {...} =1 {...} other {...}}" />
+  </source>
+  <target>xx-Updated: <x id="ICU" equiv-text="{minutes, plural, =0 {...} =1 {...} other {...}}" />
+  </target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">app/app.component.ts</context>
+    <context context-type="linenumber">30</context>
+  </context-group>
+</trans-unit>
+<trans-unit id="2508975984005233379" datatype="html">
+  <source>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<x id="INTERPOLATION" equiv-text="{{minutes}}" />
+ minutes ago by {VAR_SELECT, select, male {male} female {female} other {other} }} }</source>
+  <target>{VAR_PLURAL, plural, =0 {just now} =1 {one minute ago} other {<x id="INTERPOLATION" equiv-text="{{minutes}}" />
+ minutes ago by {VAR_SELECT, select, male {male} female {female} other {other} }} }-xx</target>
+  <context-group purpose="location">
+    <context context-type="sourcefile">app/app.component.ts</context>
+    <context context-type="linenumber">30</context>
+  </context-group>
+</trans-unit>
+</body>

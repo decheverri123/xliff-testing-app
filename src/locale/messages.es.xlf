@@ -52,7 +52,8 @@
       <trans-unit id="3560311772637911677" datatype="html">
         <source>The author is <x id="ICU" equiv-text="{gender, select, male {...} female {...} other {...}}"/>
         </source>
-        <target>El autor es <x id="ICU" equiv-text="{gender, select, male {...} female {...} other {...}}"/>
+        <target>xx-El autor es <x id="ICU" equiv-text="{gender, select, male {...} female {...} other {...}}"/>
+-xx
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.ts</context>

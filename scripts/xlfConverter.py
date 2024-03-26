@@ -1,36 +1,75 @@
-import sys
 import xml.etree.ElementTree as ET
+import sys
+import copy
 
 
-def process_xlf_file(source_file, output_file, prefix):
-    tree = ET.parse(source_file)
+def process_xlf(input_file, output_file, prefix):
+    # Parse the input XML file
+    tree = ET.parse(input_file)
     root = tree.getroot()
 
-    # Remove the namespace prefix from all elements
-    for elem in root.iter():
-        if elem.tag.startswith('{'):
-            elem.tag = elem.tag.split('}', 1)[1]
+    # Set the namespace map
+    ET.register_namespace('', 'urn:oasis:names:tc:xliff:document:1.2')
 
-    # Find all <trans-unit> elements
-    trans_units = root.findall(".//trans-unit")
+    # Iterate over each trans-unit in the file
+    for trans_unit in root.findall('.//{urn:oasis:names:tc:xliff:document:1.2}trans-unit'):
+        # Get the source element
+        source = trans_unit.find(
+            '{urn:oasis:names:tc:xliff:document:1.2}source')
 
-    for trans_unit in trans_units:
-        source_element = trans_unit.find("./source")
-        if source_element is not None:
-            source_text = source_element.text
-            modified_text = f"{prefix}-{source_text}-{prefix}"
-            source_element.text = modified_text
+        # Create the target element
+        target = ET.Element('{urn:oasis:names:tc:xliff:document:1.2}target')
 
-    tree.write(output_file, encoding="utf-8", xml_declaration=True)
+        # Check for dynamic content in source
+        dynamic_elements = source.findall(
+            './/{urn:oasis:names:tc:xliff:document:1.2}x')
+        source_starts_with_curly = source.text and source.text.startswith('{')
+
+        if dynamic_elements and not source_starts_with_curly:
+            # If dynamic content exists, copy the source element and its children to the target element
+            source_text = source.text.strip() if source.text else ''
+            target.text = f"{prefix}-{source_text} "
+            for child in source:
+                target_child = copy.deepcopy(child)
+                target.append(target_child)
+
+        elif dynamic_elements and source_starts_with_curly:
+            # If dynamic content exists, copy the source element and its children to the target element
+            source_text = source.text.strip() if source.text else ''
+            target.text = f"{source_text}"
+            for child in source:
+                target_child = copy.deepcopy(child)
+                target.append(target_child)
+                if target_child.tail:
+                    target_child.tail = f" {target_child.tail.strip()}-{prefix}"
+                else:
+                    target_child.tail = f" -{prefix}"
+
+        elif source_starts_with_curly:
+            source_text = source.text.strip() if source.text else ''
+            target.text = ''.join(source.itertext()).strip()
+            target.text += f"-{prefix} "
+
+        else:
+            # No dynamic content, apply prefix and suffix to text
+            source_text = ''.join(source.itertext()).strip()
+            target.text = f"{prefix}-{source_text}-{prefix}"
+
+        # Insert the target element after the source element
+        source_index = list(trans_unit).index(source)
+        trans_unit.insert(source_index + 1, target)
+
+    # Write the modified tree to the output file
+    tree.write(output_file, encoding='UTF-8', xml_declaration=True)
 
 
-if len(sys.argv) != 4:
-    print("Usage: python converter.py prefix input_file output_file")
-    sys.exit(1)
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: python script.py prefix input.xlf output.xlf")
+        sys.exit(1)
 
-prefix = sys.argv[1]
-source_file = sys.argv[2]
-output_file = sys.argv[3]
+    prefix = sys.argv[1]
+    input_file = sys.argv[2]
+    output_file = sys.argv[3]
 
-process_xlf_file(source_file, output_file, prefix)
-print(f"Modified .xlf file has been generated: {output_file}")
+    process_xlf(input_file, output_file, prefix)
