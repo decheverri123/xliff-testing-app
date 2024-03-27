@@ -24,6 +24,16 @@ pipeline {
             }
         }
 
+        stage('Print XLF File') {
+            steps {
+                script {
+                    def xlfFile = readFile(file: 'src/locale/output.xlf')
+                    echo "Generated XLF File Content:"
+                    echo xlfFile
+                }
+            }
+        }
+
         stage('Run Node.js tests') {
             steps {
                 // Install the dependencies
