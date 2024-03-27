@@ -16,18 +16,6 @@ pipeline {
             }
         }
 
-        stage('Run Node.js tests') {
-            steps {
-                // Install the dependencies
-                sh 'npm install'
-
-                // Run the tests in the scripts directory
-                sh 'npm test:node'
-            }
-        }
-
-
-
         stage('Generate .xlf file') {
             steps {
                 // Run the Python script to generate the .xlf file
@@ -35,5 +23,19 @@ pipeline {
                 sh 'python3 scripts/xlfConverter.py xx locale/messages.xlf locale/output.xlf'
             }
         }
+
+        stage('Run Node.js tests') {
+            steps {
+                // Install the dependencies
+                sh 'npm install'
+
+                // Run the tests in the scripts directory
+                sh 'npm run test:node'
+            }
+        }
+
+
+
+
     }
 }
