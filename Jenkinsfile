@@ -8,8 +8,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from the Git repository
-                scm checkout
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // Specify the branch to checkout
+                    userRemoteConfigs: [[url: 'https://github.com/decheverri123/xliff-testing-app.git']] // Specify the repository URL
+                ])
             }
         }
 
