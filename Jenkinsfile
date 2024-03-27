@@ -20,7 +20,7 @@ pipeline {
             steps {
                 // Run the Python script to generate the .xlf file
                 // Replace 'prefix', 'input.xlf', and 'output.xlf' with your actual values
-                sh 'python3 scripts/xlfConverter.py xx locale/messages.xlf locale/output.xlf'
+                sh 'python3 scripts/xlfConverter.py xx src/locale/messages.xlf src/locale/output.xlf'
             }
         }
 
